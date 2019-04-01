@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- using SVG tags -->
+    <!-- <svg width="600" height="600">
+        <circle cx="150" cy="150" r="50" fill="grey"></circle>
+    </svg> -->
+
+    <!-- path element -->
+    <!-- https://svgwg.org/svg2-draft/paths.html#PathData -->
+    <svg>
+        <!-- M: start point, L: line, Z: end point -->
+        <!-- <path d="M 150 50 L 75 200 L 225 200 Z" fill="red"></path> -->
+
+        <!-- C: 兩兩一組為點的位置，「起點到第二點」為「起點到終點」的切線 -->
+        <path d="M 150 50 L 75 200 L 225 200 C 225 200 75 57 150 50" fill="red"></path>
+    </svg>
+
+
+    <!-- <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 10,30
+               A 20,20 0,0,1 50,30
+               A 20,20 0,0,1 90,30
+               Q 90,60 50,90
+               Q 10,60 10,30 z" />
+    </svg> -->
+</body>
+
+</html>

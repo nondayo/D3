@@ -1,0 +1,3 @@
+https://github.com/d3/d3/wiki/Gallery
+https://github.com/rstudio/r2d3
+https://developer.mozilla.org/en-US/docs/Web/SVG/Element#SVG_elements_by_category
