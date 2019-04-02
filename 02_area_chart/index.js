@@ -1,10 +1,10 @@
 // 參考範例
 // https://observablehq.com/@d3/area-chart
 
-d3.csv("data.csv")
+d3.csv("https://gist.githubusercontent.com/mbostock/14613fb82f32f40119009c94f5a46d72/raw/d0d70ffb7b749714e4ba1dece761f6502b2bdea2/aapl.csv?fbclid=IwAR1xHai0Z0fYfY2iqKiVZDLog138Np8Z68mh_yR-sRotTPRprFbYC92hBLc", d3.autoType)
     .then(function (data) {
         // console.debug(JSON.stringify(data));
-        data = data.map(({date, close}) => ({date, value: close})), {y: "$ Close"}
+        data = Object.assign(data.map(({date, close}) => ({date, value: close})), {y: "$ Close"});
         console.log(data);
 
         let height = 500,
