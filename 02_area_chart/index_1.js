@@ -11,16 +11,15 @@ var margin = {
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+let svg = d3.select('#my_dataviz')
+    .append('svg')
+    .attr('width', 460)
+    .attr('height', 400)
+    .append('g')
+    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
 const url = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv";
-//Read the data
+
 d3.csv(url,
     // When reading the csv, I must format variables:
     function (d) {
@@ -29,14 +28,12 @@ d3.csv(url,
             value: d.value
         }
     },
-
     // Now I can use this dataset:
     function (data) {
         // Add X axis --> it is a date format
         var x = d3.scaleTime()
             .domain(d3.extent(data, d => d.date))
-            // .range([0, width]);
-            .rangeRound([0, width]);
+            .range([0, width]);
 
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
@@ -45,8 +42,7 @@ d3.csv(url,
         // Add Y axis
         var y = d3.scaleLinear()
             .domain([0, d3.max(data, d => +d.value)])
-            // .range([height, 0]);
-            .rangeRound([height, 0]);
+            .range([height, 0]);
         svg.append("g")
             .call(d3.axisLeft(y));
 
