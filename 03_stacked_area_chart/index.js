@@ -20,30 +20,49 @@ var svg = d3.select("#my_dataviz")
 
 //Read the data
 const url = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/5_OneCatSevNumOrdered.csv";
+// year, sex, name, n, prop
+// 1880, F, Helen, 636, 0.00651612638826278
 d3.csv(url, function (data) {
+    // console.log(data);
+    // n: "636"
+    // name: "Helen"
+    // prop: "0.00651612638826278"
+    // sex: "F"
+    // year: "1880"
 
     // group the data: one array for each value of the X axis.
     var sumstat = d3.nest()
-        .key(function (d) {
-            return d.year;
-        })
+        .key(d => d.year)
         .entries(data);
+    console.log(sumstat);
+    // n: "636"
+    // name: "Helen"
+    // prop: "0.00651612638826278"
+    // sex: "F"
+    // year: "1880"
 
     // Stack the data: each group will be represented on top of each other
-    var mygroups = ["Helen", "Amanda", "Ashley"] // list of group names
-    var mygroup = [1, 2, 3] // list of group names
+    // var mygroups = ["Helen", "Amanda", "Ashley"] // list of group names
+    // var mygroup = [1, 2, 3] // list of group names
+    // var mygroups = [...new Set(data.map(x => x.name))] // unique(data$name)
+    var mygroups = ["Helen", "Amanda", "Betty", "Dorothy", "Linda", "Jessica"]
+    // [ "Helen", "Amanda", "Betty", "Dorothy", "Linda", "Deborah", "Jessica", "Patricia", "Ashley" ]
+    // const N = mygroups.length;
+    // var mygroup = Array.from(Array(N), (e, i) => i + 1)
+    var mygroup = [0, 1, 2, 3, 4, 5]
+    // [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+
     var stackedData = d3.stack()
         .keys(mygroup)
         .value(function (d, key) {
+            // debugger;
             return d.values[key].n
         })
         (sumstat)
-
+    console.log(stackedData);
     // Add X axis --> it is a date format
     var x = d3.scaleLinear()
-        .domain(d3.extent(data, function (d) {
-            return d.year;
-        }))
+        .domain(d3.extent(data, d => d.year))
         .range([0, width]);
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -59,9 +78,10 @@ d3.csv(url, function (data) {
         .call(d3.axisLeft(y));
 
     // color palette
-    var color = d3.scaleOrdinal()
-        .domain(mygroups)
-        .range(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'])
+    // var color = d3.scaleOrdinal()
+    //     .domain(mygroups)
+    //     .range(['#dbd9cf', '#f5ecec', '#f1aaaa', '#dd6f6f', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'])
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
 
     // Show the areas
     svg
